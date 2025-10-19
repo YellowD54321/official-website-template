@@ -12,11 +12,10 @@ export default function Home() {
         <main className='flex flex-col gap-[32px] row-start-2 items-center sm:items-start'>
           <section className='h-screen w-full flex flex-col gap-[32px] items-center justify-center'>
             <h2 className='text-4xl font-bold text-center sm:text-left'>
-              歡迎來到我們的網站
+              專業廠房自動配電與智能控制解決方案
             </h2>
             <p className='text-lg text-gray-600 text-center sm:text-left max-w-2xl'>
-              這是一個使用 Next.js
-              建立的官方網站範本。我們致力於提供優質的服務和解決方案。
+              我們專注於提供完整的工業自動化系統，包含自動配電系統設計與安裝、智能控制系統整合、以及工廠能源管理方案。憑藉多年的產業經驗與專業技術，協助企業提升生產效率、降低營運成本，並確保用電安全與穩定性。
             </p>
           </section>
 
