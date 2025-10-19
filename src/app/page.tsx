@@ -2,13 +2,9 @@
 
 import Image from 'next/image';
 import Header from '../components/Header';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import ServiceBlock from '@/components/home/ServiceBlock';
 
 export default function Home() {
-  const { ref: imageRef, isVisible } = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.1, // 當 10% 的元素進入視窗時觸發
-  });
-
   return (
     <div className='font-sans min-h-screen'>
       <Header />
@@ -26,27 +22,7 @@ export default function Home() {
 
           {/* 滾動觸發的圖片區塊 */}
           <div className='w-full py-20 px-8 sm:px-20'>
-            <div
-              ref={imageRef}
-              className={`max-w-6xl mx-auto transition-all duration-1000 ease-out ${
-                isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
-              }`}
-            >
-              <h2 className='text-3xl font-bold text-center mb-8'>
-                我們的團隊
-              </h2>
-              <div className='relative w-full h-[400px] sm:h-[500px] rounded-lg overflow-hidden shadow-2xl'>
-                <Image
-                  src='/engineers.jpg'
-                  alt='工程師團隊'
-                  fill
-                  className='object-cover'
-                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px'
-                />
-              </div>
-            </div>
+            <ServiceBlock />
           </div>
         </main>
         <footer className='row-start-3 flex gap-[24px] flex-wrap items-center justify-center'>
