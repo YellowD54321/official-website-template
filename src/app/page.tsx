@@ -2,36 +2,12 @@
 
 import Image from 'next/image';
 import Header from '../components/Header';
-import { useEffect, useRef, useState } from 'react';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 export default function Home() {
-  const [isVisible, setIsVisible] = useState(false);
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      {
-        threshold: 0.1, // 當 10% 的元素進入視窗時觸發
-      }
-    );
-
-    if (imageRef.current) {
-      observer.observe(imageRef.current);
-    }
-
-    return () => {
-      if (imageRef.current) {
-        observer.unobserve(imageRef.current);
-      }
-    };
-  }, []);
+  const { ref: imageRef, isVisible } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.1, // 當 10% 的元素進入視窗時觸發
+  });
 
   return (
     <div className='font-sans min-h-screen'>
