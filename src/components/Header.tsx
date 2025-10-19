@@ -99,40 +99,42 @@ export default function Header() {
       </div>
 
       {/* 手機版導航菜單 */}
-      {isMenuOpen && (
-        <div className='md:hidden absolute top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg'>
-          <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
-            <a
-              href='#'
-              className='text-gray-900 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
-              onClick={toggleMenu}
-            >
-              首頁
-            </a>
-            <a
-              href='#'
-              className='text-gray-600 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
-              onClick={toggleMenu}
-            >
-              關於我們
-            </a>
-            <a
-              href='#'
-              className='text-gray-600 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
-              onClick={toggleMenu}
-            >
-              服務項目
-            </a>
-            <a
-              href='#'
-              className='text-gray-600 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
-              onClick={toggleMenu}
-            >
-              聯絡我們
-            </a>
-          </div>
+      <div
+        className={`md:hidden absolute top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
+          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 border-b-0'
+        }`}
+      >
+        <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
+          <a
+            href='#'
+            className='text-gray-900 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
+            onClick={toggleMenu}
+          >
+            首頁
+          </a>
+          <a
+            href='#'
+            className='text-gray-600 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
+            onClick={toggleMenu}
+          >
+            關於我們
+          </a>
+          <a
+            href='#'
+            className='text-gray-600 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
+            onClick={toggleMenu}
+          >
+            服務項目
+          </a>
+          <a
+            href='#'
+            className='text-gray-600 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
+            onClick={toggleMenu}
+          >
+            聯絡我們
+          </a>
         </div>
-      )}
+      </div>
     </header>
   );
 }
