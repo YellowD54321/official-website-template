@@ -14,9 +14,9 @@
 
 #### 1.1 安裝必要的 npm 套件
 
-- [ ] 安裝 `nodemailer`（用於發送郵件）
-- [ ] 安裝 `@types/nodemailer`（TypeScript 型別定義）
-- [ ] 安裝 `zod`（用於表單驗證）
+- [x] 安裝 `nodemailer`（用於發送郵件）
+- [x] 安裝 `@types/nodemailer`（TypeScript 型別定義）
+- [x] 安裝 `zod`（用於表單驗證）
 
 #### 1.2 建立環境變數檔案
 
