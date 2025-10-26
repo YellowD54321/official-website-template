@@ -2,8 +2,9 @@
 
 ## 專案概述
 
-建立一個聯絡我們頁面，讓瀏覽者可以透過 SMTP 發送郵件到公司信箱。
+建立一個聯絡我們頁面，讓瀏覽者可以透過 Resend 發送郵件到公司信箱。
 
+**使用服務**: Resend（現代化郵件發送服務）  
 **公司信箱**: 123@gmail.com
 
 ---
@@ -14,18 +15,14 @@
 
 #### 1.1 安裝必要的 npm 套件
 
-- [x] 安裝 `nodemailer`（用於發送郵件）
-- [x] 安裝 `@types/nodemailer`（TypeScript 型別定義）
+- [x] 安裝 `resend`（現代化郵件發送服務）
 - [x] 安裝 `zod`（用於表單驗證）
 
 #### 1.2 建立環境變數檔案
 
 - [ ] 建立 `.env.local` 檔案
 - [ ] 設定以下環境變數：
-  - `SMTP_HOST`（例如：smtp.gmail.com）
-  - `SMTP_PORT`（例如：587）
-  - `SMTP_USER`（公司信箱：123@gmail.com）
-  - `SMTP_PASSWORD`（SMTP 密碼，暫時隨意設定）
+  - `RESEND_API_KEY`（Resend API 金鑰）
   - `COMPANY_EMAIL`（收件者信箱：123@gmail.com）
 - [ ] 建立 `.env.example` 作為環境變數範本
 - [ ] 確認 `.env.local` 已加入 `.gitignore`
@@ -37,9 +34,9 @@
 #### 2.1 建立郵件發送服務
 
 - [ ] 建立 `src/lib/email.ts` 或 `src/services/email.ts`
-- [ ] 配置 nodemailer transporter
+- [ ] 配置 Resend 客戶端
 - [ ] 建立發送郵件的函式
-- [ ] 處理 SMTP 連線錯誤
+- [ ] 處理 API 錯誤
 
 #### 2.2 建立 API Route
 
@@ -48,7 +45,7 @@
 - [ ] 驗證請求資料（使用 zod）
 - [ ] 呼叫郵件發送服務
 - [ ] 回傳適當的 HTTP 狀態碼和訊息
-- [ ] 處理錯誤情況（例如：SMTP 連線失敗、驗證失敗）
+- [ ] 處理錯誤情況（例如：API 呼叫失敗、驗證失敗）
 
 #### 2.3 安全性處理
 
@@ -119,7 +116,8 @@
 - [ ] 測試表單送出功能
 - [ ] 驗證郵件是否成功發送到 123@gmail.com
 - [ ] 測試各種錯誤情況（例如：空白欄位、無效 email）
-- [ ] 測試 SMTP 連線失敗的錯誤處理
+- [ ] 測試 API 呼叫失敗的錯誤處理
+- [ ] 在 Resend Dashboard 查看郵件發送狀態
 
 #### 6.2 UI/UX 測試
 
@@ -139,31 +137,41 @@
 
 - [ ] 更新 README.md，加入環境變數設定說明
 - [ ] 撰寫簡單的使用文件
-- [ ] 確認 production 環境的 SMTP 設定流程
+- [ ] 確認 production 環境的 Resend API Key 設定流程
 
 ---
 
 ## 📝 注意事項
 
-### Gmail SMTP 設定提醒
+### Resend 設定說明
 
-如果使用 Gmail 作為 SMTP 服務：
+**為什麼選擇 Resend？**
 
-1. 需要在 Google 帳號設定中啟用「應用程式密碼」
-2. 不能使用一般的登入密碼
-3. SMTP 設定：
-   - Host: `smtp.gmail.com`
-   - Port: `587` (TLS) 或 `465` (SSL)
-   - Secure: `true` (使用 465 port) 或 `false` (使用 587 port)
+1. ✅ **超級簡單**：只需要一個 API key，無需複雜的 SMTP 設定
+2. ✅ **現代化**：專為 Next.js、React 等現代框架設計
+3. ✅ **免費額度充足**：每月 3,000 封郵件（聯絡表單綽綽有餘）
+4. ✅ **穩定可靠**：專業郵件服務，不會被封鎖
+5. ✅ **監控完整**：提供 Dashboard 查看郵件發送狀態
+6. ✅ **支援自訂網域**：可以使用自己的網域發送郵件
 
-### 替代方案
+**取得 API Key 的步驟：**
 
-考慮使用第三方郵件服務（更穩定、更容易設定）：
+1. 前往 [https://resend.com](https://resend.com) 註冊帳號
+2. 登入後前往 [API Keys](https://resend.com/api-keys) 頁面
+3. 點擊「Create API Key」
+4. 輸入名稱（例如：Website Contact Form）
+5. 選擇權限：Sending access
+6. 複製產生的 API key（格式：`re_xxxxxxxxxx`）
+7. 將 API key 填入 `.env.local` 的 `RESEND_API_KEY`
 
-- SendGrid
-- Mailgun
-- AWS SES
-- Resend
+### 其他替代方案
+
+如果 Resend 不適合，也可以考慮：
+
+- **SendGrid**（免費 100 封/天）
+- **Mailgun**（免費 5,000 封/月，前 3 個月）
+- **Postmark**（免費 100 封/月）
+- **AWS SES**（便宜但設定複雜）
 
 ---
 
@@ -194,22 +202,24 @@
 ```
 /Users/yellowd/Desktop/code/side_project/official-website-template/
 ├── .env.local （新增）
+│   └── RESEND_API_KEY=re_xxxxxxxxxx
+│   └── COMPANY_EMAIL=123@gmail.com
 ├── .env.example （新增）
 ├── src/
 │   ├── app/
 │   │   ├── api/
 │   │   │   └── contact/
-│   │   │       └── route.ts （新增）
+│   │   │       └── route.ts （新增 - 使用 Resend API）
 │   │   └── contact/
 │   │       └── page.tsx （新增）
 │   ├── components/
 │   │   └── contact/
 │   │       └── ContactForm.tsx （新增）
-│   ├── lib/ 或 services/
-│   │   └── email.ts （新增）
+│   ├── lib/
+│   │   └── email.ts （新增 - Resend 郵件服務）
 │   └── types/
-│       └── contact.ts （新增，可選）
-└── package.json （修改 - 加入新套件）
+│       └── contact.ts （新增）
+└── package.json （修改 - 加入 resend 套件）
 ```
 
 ---
@@ -220,12 +230,13 @@
 
 1. ✅ 使用者可以在 `/contact` 頁面填寫表單
 2. ✅ 表單包含：對方信箱、標題、內容（textarea）
-3. ✅ 送出後透過 SMTP 發送郵件到 123@gmail.com
+3. ✅ 送出後透過 Resend API 發送郵件到 123@gmail.com
 4. ✅ 所有欄位都有適當的驗證
 5. ✅ 顯示清楚的成功/錯誤訊息
 6. ✅ 響應式設計在各種裝置上都能正常運作
-7. ✅ 不會暴露敏感資訊（SMTP 密碼等）
-8. ✅ 有基本的安全防護措施
+7. ✅ 不會暴露敏感資訊（Resend API Key 等）
+8. ✅ 有基本的安全防護措施（rate limiting）
+9. ✅ 可在 Resend Dashboard 查看郵件發送記錄
 
 ---
 
