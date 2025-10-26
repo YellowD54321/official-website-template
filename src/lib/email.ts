@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 // 郵件資料介面
 export interface EmailData {
@@ -7,27 +7,15 @@ export interface EmailData {
   message: string; // 郵件內容
 }
 
-// 建立 nodemailer transporter
-const createTransporter = () => {
-  // 檢查必要的環境變數
-  if (
-    !process.env.SMTP_HOST ||
-    !process.env.SMTP_PORT ||
-    !process.env.SMTP_USER ||
-    !process.env.SMTP_PASSWORD
-  ) {
-    throw new Error('缺少必要的 SMTP 環境變數設定');
+// 建立 Resend 客戶端
+const getResendClient = () => {
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    throw new Error('缺少 RESEND_API_KEY 環境變數');
   }
 
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT),
-    secure: process.env.SMTP_PORT === '465', // 如果是 port 465 使用 SSL，587 使用 TLS
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
+  return new Resend(apiKey);
 };
 
 /**
@@ -37,20 +25,19 @@ const createTransporter = () => {
  */
 export async function sendContactEmail(emailData: EmailData): Promise<void> {
   try {
-    const transporter = createTransporter();
+    const resend = getResendClient();
     const companyEmail = process.env.COMPANY_EMAIL;
 
     if (!companyEmail) {
       throw new Error('未設定公司信箱（COMPANY_EMAIL）');
     }
 
-    // 郵件選項
-    const mailOptions = {
-      from: process.env.SMTP_USER, // 使用 SMTP 帳號作為寄件者
+    // 使用 Resend 發送郵件
+    const { data, error } = await resend.emails.send({
+      from: 'onboarding@resend.dev', // Resend 預設的測試發件地址
       to: companyEmail, // 收件者：公司信箱
       replyTo: emailData.from, // 回覆地址設為表單填寫者的信箱
       subject: `【聯絡表單】${emailData.subject}`,
-      text: `來自：${emailData.from}\n\n${emailData.message}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333;">聯絡表單訊息</h2>
@@ -67,29 +54,16 @@ export async function sendContactEmail(emailData: EmailData): Promise<void> {
           </p>
         </div>
       `,
-    };
+    });
 
-    // 發送郵件
-    const info = await transporter.sendMail(mailOptions);
-    console.log('郵件發送成功:', info.messageId);
+    if (error) {
+      console.error('Resend API 錯誤:', error);
+      throw new Error('郵件發送失敗，請稍後再試');
+    }
+
+    console.log('郵件發送成功:', data?.id);
   } catch (error) {
     console.error('郵件發送失敗:', error);
     throw new Error('郵件發送失敗，請稍後再試');
-  }
-}
-
-/**
- * 驗證 SMTP 連線設定
- * @returns Promise<boolean>
- */
-export async function verifyEmailConnection(): Promise<boolean> {
-  try {
-    const transporter = createTransporter();
-    await transporter.verify();
-    console.log('SMTP 連線測試成功');
-    return true;
-  } catch (error) {
-    console.error('SMTP 連線測試失敗:', error);
-    return false;
   }
 }

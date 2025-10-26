@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     // Zod 驗證錯誤
     if (error instanceof ZodError) {
-      const firstError = error.errors[0];
+      const firstError = error.issues[0];
       return NextResponse.json(
         {
           success: false,
