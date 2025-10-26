@@ -164,6 +164,15 @@
 6. 複製產生的 API key（格式：`re_xxxxxxxxxx`）
 7. 將 API key 填入 `.env.local` 的 `RESEND_API_KEY`
 
+**關於發件地址（From Address）：**
+
+- 📧 **目前使用** `onboarding@resend.dev` 作為發件地址（Resend 的測試地址）
+- ✅ 這個地址可以直接使用，適合測試和開發階段
+- 🏢 **自訂網域**：如果您有自己的網域，可以在 Resend 後台驗證後使用自訂發件地址
+  - 例如：`noreply@yourdomain.com` 或 `contact@yourdomain.com`
+  - 驗證步驟：在 Resend Dashboard 的 [Domains](https://resend.com/domains) 頁面新增您的網域並完成 DNS 設定
+  - 使用自訂網域可以提升郵件的專業度和信任度
+
 ### 其他替代方案
 
 如果 Resend 不適合，也可以考慮：
