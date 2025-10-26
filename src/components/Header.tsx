@@ -22,7 +22,7 @@ export default function Header() {
           <nav className='hidden md:block'>
             <div className='ml-10 flex items-baseline space-x-4'>
               <a
-                href='#'
+                href='/'
                 className='text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors'
               >
                 首頁
@@ -40,7 +40,7 @@ export default function Header() {
                 服務項目
               </a>
               <a
-                href='#'
+                href='/contact'
                 className='text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors'
               >
                 聯絡我們
@@ -106,7 +106,7 @@ export default function Header() {
       >
         <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
           <a
-            href='#'
+            href='/'
             className='text-gray-900 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
             onClick={toggleMenu}
           >
@@ -127,7 +127,7 @@ export default function Header() {
             服務項目
           </a>
           <a
-            href='#'
+            href='/contact'
             className='text-gray-600 hover:text-blue-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors'
             onClick={toggleMenu}
           >

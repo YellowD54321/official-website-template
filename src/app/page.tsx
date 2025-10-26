@@ -1,13 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import Header from '../components/Header';
 import ServiceBlock from '@/components/home/ServiceBlock';
 
 export default function Home() {
   return (
     <div className='font-sans min-h-screen'>
-      <Header />
       <div>
         <main className='flex flex-col gap-[32px] row-start-2 items-center sm:items-start'>
           <section className='h-screen w-full flex flex-col gap-[32px] items-center justify-center'>
