@@ -9,10 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@types/nodemailer": "^7.0.3",
     "axios": "^1.12.2",
     "next": "15.5.4",
-    "nodemailer": "^7.0.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "resend": "^6.2.2",
