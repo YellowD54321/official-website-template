@@ -92,8 +92,8 @@ export default function ContactForm() {
         <div
           className={`p-4 rounded-lg border ${
             submitStatus.type === 'success'
-              ? 'bg-green-50 border-green-200 text-green-800'
-              : 'bg-red-50 border-red-200 text-red-800'
+              ? 'bg-green-950/50 border-green-800 text-green-400'
+              : 'bg-red-950/50 border-red-800 text-red-400'
           }`}
           role='alert'
         >
@@ -108,7 +108,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor='email'
-          className='block text-sm font-medium text-gray-700 mb-2'
+          className='block text-sm font-medium text-gray-300 mb-2'
         >
           您的電子郵件 <span className='text-red-500'>*</span>
         </label>
@@ -120,7 +120,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder='example@email.com'
-          className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all'
+          className='w-full px-4 py-3 bg-black/40 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-white placeholder:text-gray-500'
           disabled={isSubmitting}
         />
       </div>
@@ -129,7 +129,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor='subject'
-          className='block text-sm font-medium text-gray-700 mb-2'
+          className='block text-sm font-medium text-gray-300 mb-2'
         >
           標題 <span className='text-red-500'>*</span>
         </label>
@@ -142,7 +142,7 @@ export default function ContactForm() {
           required
           placeholder='請輸入標題'
           maxLength={200}
-          className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all'
+          className='w-full px-4 py-3 bg-black/40 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-white placeholder:text-gray-500'
           disabled={isSubmitting}
         />
       </div>
@@ -151,7 +151,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor='message'
-          className='block text-sm font-medium text-gray-700 mb-2'
+          className='block text-sm font-medium text-gray-300 mb-2'
         >
           訊息內容 <span className='text-red-500'>*</span>
         </label>
@@ -164,7 +164,7 @@ export default function ContactForm() {
           placeholder='請輸入您的訊息內容...'
           rows={8}
           maxLength={5000}
-          className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-y'
+          className='w-full px-4 py-3 bg-black/40 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-y text-white placeholder:text-gray-500'
           disabled={isSubmitting}
         />
         <p className='text-sm text-gray-500 mt-1'>
@@ -178,7 +178,7 @@ export default function ContactForm() {
         disabled={isSubmitting}
         className={`w-full py-3 px-6 rounded-lg font-medium text-white transition-all duration-200 ${
           isSubmitting
-            ? 'bg-gray-400 cursor-not-allowed'
+            ? 'bg-gray-700 cursor-not-allowed'
             : 'bg-blue-600 hover:bg-blue-700 active:scale-[0.98]'
         }`}
       >

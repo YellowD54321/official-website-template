@@ -9,14 +9,12 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className='min-h-screen bg-gradient-to-b from-gray-50 to-white'>
+    <main className='min-h-screen'>
       <div className='container mx-auto px-4 py-16 sm:py-24'>
         {/* 頁面標題區 */}
         <div className='text-center mb-12'>
-          <h1 className='text-4xl sm:text-5xl font-bold text-gray-900 mb-4'>
-            聯絡我們
-          </h1>
-          <p className='text-lg text-gray-600 max-w-2xl mx-auto'>
+          <h1 className='text-4xl sm:text-5xl font-bold mb-4'>聯絡我們</h1>
+          <p className='text-lg text-gray-400 max-w-2xl mx-auto'>
             有任何問題或建議嗎？歡迎透過以下表單與我們聯繫
             <br />
             我們會盡快回覆您的訊息
@@ -25,11 +23,11 @@ export default function ContactPage() {
 
         {/* 聯絡資訊卡片 */}
         <div className='max-w-2xl mx-auto mb-12'>
-          <div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
+          <div className='bg-black/30 rounded-xl border border-gray-800 p-8 hover:border-gray-700 transition-colors'>
             <div className='flex items-start gap-4'>
               <div className='flex-shrink-0'>
                 <svg
-                  className='w-6 h-6 text-blue-600'
+                  className='w-6 h-6 text-blue-500'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -43,14 +41,12 @@ export default function ContactPage() {
                 </svg>
               </div>
               <div>
-                <h2 className='text-lg font-semibold text-gray-900 mb-1'>
-                  電子郵件
-                </h2>
-                <p className='text-gray-600'>
+                <h2 className='text-lg font-semibold mb-1'>電子郵件</h2>
+                <p className='text-gray-400'>
                   您也可以直接寄信至：
                   <a
                     href='mailto:123@gmail.com'
-                    className='text-blue-600 hover:text-blue-700 hover:underline ml-1'
+                    className='text-blue-500 hover:text-blue-400 hover:underline ml-1'
                   >
                     123@gmail.com
                   </a>
@@ -61,7 +57,7 @@ export default function ContactPage() {
         </div>
 
         {/* 聯絡表單 */}
-        <div className='bg-white rounded-xl shadow-lg p-8 sm:p-12 max-w-2xl mx-auto border border-gray-100'>
+        <div className='bg-black/30 rounded-xl border border-gray-800 p-8 sm:p-12 max-w-2xl mx-auto'>
           <ContactForm />
         </div>
 
